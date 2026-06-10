@@ -1,15 +1,19 @@
 const renderTime = document.querySelector(".time");
 
-const getTime = setInterval(() => {
+function getTime12(){
 
   const now = new Date();
-  const HH = String(now.getHours()).padStart(2, '0');
+  let HH = String(now.getHours()).padStart(2, '0');
   const MM = String(now.getMinutes()).padStart(2, '0');
   const SS = String(now.getSeconds()).padStart(2, '0');
 
   const amPm = (HH < 12) ? 'AM': 'PM';
+  HH = HH % 12 || 12;
+   
+  return `${HH}:${MM}:${SS} ${amPm}`
 
-  renderTime.innerHTML = `${HH}:${MM}:${SS} ${amPm}`
+}
 
-},1000)
-
+setInterval(() => {
+  renderTime.textContent = getTime12();
+}, 1000);
